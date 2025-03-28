@@ -30,29 +30,7 @@ $interval = Interval::fromString('[1,5)');  // Right-open interval
 $interval = Interval::fromString('(1,5]');  // Left-open interval
 ```
 
-### Interval Comparisons
-
-Check if an interval is greater/less than a value:
-
-```php
-$interval = Interval::fromString('[2,5]');
-
-$interval->isGreaterThan(1);      // true
-$interval->isGreaterThanOrEqualTo(2);  // true
-$interval->isLessThan(6);         // true
-$interval->isLessThanOrEqualTo(5);     // true
-```
-
-### String Representation
-
-Intervals can be converted back to string notation:
-
-```php
-$interval = Interval::fromString('[1,5]');
-echo $interval;  // "[1,5]"
-```
-
-## Interval Notation
+### Interval Notation
 
 The library supports four types of interval notation:
 
@@ -62,6 +40,19 @@ The library supports four types of interval notation:
 - `(a,b]` - **Left-open interval**: excludes `a` but includes `b`. Example: `(1,5]` includes all values greater than 1 up to and including 5.
 
 The inclusion or exclusion of the endpoints determines how comparisons behave. For example, if an interval is `(1,5)`, calling `$interval->isGreaterThan(1)` will return `true` because 1 is not part of the interval. However, if the interval is `[1,5]`, then `$interval->isGreaterThanOrEqualTo(1)` will return `true` since 1 is included.
+
+Understanding this notation is crucial for interpreting comparison behavior correctly.
+
+### Interval Comparisons
+
+```php
+$interval = Interval::fromString('[2,5]');
+
+$interval->isGreaterThan(1);      // true
+$interval->isGreaterThanOrEqualTo(2);  // true
+$interval->isLessThan(6);         // true
+$interval->isLessThanOrEqualTo(5);     // true
+```
 
 Comparisons such as `$interval->isGreaterThan($value)` evaluate whether *all* values within the interval are greater than the given value. So `[2,5]` is greater than `1` (because every number from 2 to 5 is greater than 1), but not greater than `2` unless the interval is open on the left side (e.g., `(2,5)`).
 
