@@ -84,6 +84,6 @@ class Interval implements Stringable
 
     public function __toString(): string
     {
-        return "{$this->notation->openingSymbol()}{$this->left}, {$this->right}{$this->notation->closingSymbol()}";
+        return "{$this->notation->openingSymbol()}{$this->left},{$this->right}{$this->notation->closingSymbol()}";
     }
 }
