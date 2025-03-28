@@ -36,7 +36,7 @@ class IntervalTest extends TestCase
 
     #[Test]
     #[DataProvider('invalidCases')]
-    public function it_throws_exception_for_valid_interval(string $input, string $exceptionMessage): void
+    public function it_throws_exception_for_invalid_interval(string $input, string $exceptionMessage): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMessage);
@@ -51,7 +51,17 @@ class IntervalTest extends TestCase
             ['1,2', 'Invalid interval: 1,2'],
             ['[1|2]', 'Invalid interval: [1|2]'],
             ['[12]', 'Invalid interval: [12]'],
+            ['[[1,2)', 'Invalid interval: [[1,2)'],
+            ['[1,2))', 'Invalid interval: [1,2))'],
         ];
+    }
+
+    #[Test]
+    public function left_number_can_not_be_bigger_than_right_number(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Left must be less than or equal to right. Got 2 and 1');
+        Interval::fromString('[2,1]');
     }
 
     #[Test]
