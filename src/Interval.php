@@ -32,7 +32,7 @@ class Interval implements Stringable
         return new static(
             left: BigNumber::of($matches['leftEndpoint']),
             right: BigNumber::of($matches['rightEndpoint']),
-            notation: IntervalNotation::from($matches['openingSymbol'] . $matches['closingSymbol']),
+            notation: IntervalNotation::from($matches['openingSymbol'].$matches['closingSymbol']),
         );
     }
 

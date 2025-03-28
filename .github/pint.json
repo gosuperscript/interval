@@ -1,0 +1,6 @@
+{
+  "preset": "per",
+  "rules": {
+    "final_class": true
+  }
+}

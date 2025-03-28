@@ -11,7 +11,6 @@ use Superscript\Interval\IntervalNotation;
 
 class IntervalTest extends TestCase
 {
-
     #[Test]
     #[DataProvider('validCases')]
     public function it_parses_interval_from_string(string $input, int $expectedLeft, int $expectedRight, IntervalNotation $expectedNotation): void
