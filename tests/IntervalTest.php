@@ -31,6 +31,11 @@ class IntervalTest extends TestCase
             ['[1,2]', 1, 2, IntervalNotation::Closed],
             ['(1,2]', 1, 2, IntervalNotation::LeftOpen],
             ['[1,2)', 1, 2, IntervalNotation::RightOpen],
+            ['[1,)', 1, PHP_INT_MAX, IntervalNotation::RightOpen],
+            ['(,2]', PHP_INT_MIN, 2, IntervalNotation::LeftOpen],
+            ['(,)', PHP_INT_MIN, PHP_INT_MAX, IntervalNotation::Open],
+            ['[1,2)', 1, 2, IntervalNotation::RightOpen],
+            ['(1,2]', 1, 2, IntervalNotation::LeftOpen],
         ];
     }
 
@@ -53,6 +58,9 @@ class IntervalTest extends TestCase
             ['[12]', 'Invalid interval: [12]'],
             ['[[1,2)', 'Invalid interval: [[1,2)'],
             ['[1,2))', 'Invalid interval: [1,2))'],
+            ['[1,]', 'Right endpoint must be defined when right side is closed.'],
+            ['[,1]', 'Left endpoint must be defined when left side is closed.'],
+            ['[,]', 'Left endpoint must be defined when left side is closed.']
         ];
     }
 
@@ -66,7 +74,7 @@ class IntervalTest extends TestCase
 
     #[Test]
     #[DataProvider('compareCases')]
-    public function it_can_compare_intervals(string $input, string $comparator, int $value, bool $expectation): void
+    public function it_can_compare_intervals(string $input, string $comparator, int|float $value, bool $expectation): void
     {
         $interval = Interval::fromString($input);
 
@@ -116,6 +124,29 @@ class IntervalTest extends TestCase
             ['(2,5)', '<=', 3, false],
             ['(2,5)', '<=', 5, true],
             ['(2,5)', '<=', 6, true],
+
+            ['[2,)', '>', 1, true],
+            ['[2,)', '>', 2, false],
+            ['[2,)', '>=', 2, true],
+            ['[2,)', '>=', 3, false],
+            ['[2,)', '<', 2, false],
+            ['[2,)', '<=', 2, false],
+            ['[2,)', '<=', PHP_INT_MAX, true],
+
+            ['(,5]', '>', 1, false],
+            ['(,5]', '>', 5, false],
+            ['(,5]', '>=', 1, false],
+            ['(,5]', '>=', 5, false],
+            ['(,5]', '>=', PHP_INT_MIN, true],
+            ['(,5]', '<', 2, false],
+            ['(,5]', '<=', 2, false],
+            ['(,5]', '<=', 5, true],
+            ['(,5]', '<', 6, true],
+
+            ['(,)', '>', 1, false],
+            ['(,)', '>=', PHP_INT_MIN, true],
+            ['(,)', '<', 1, false],
+            ['(,)', '<=', PHP_INT_MAX, true],
         ];
     }
 

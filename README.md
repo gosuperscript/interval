@@ -28,6 +28,8 @@ $interval = Interval::fromString('[1,5]');  // Closed interval
 $interval = Interval::fromString('(1,5)');  // Open interval 
 $interval = Interval::fromString('[1,5)');  // Right-open interval
 $interval = Interval::fromString('(1,5]');  // Left-open interval
+$interval = Interval::fromString('[1,)');  // Left-bounded interval (infinite upper bound)
+$interval = Interval::fromString('(,1]');  // Right-bounded interval (infinite lower bound)
 ```
 
 ### Interval Notation
@@ -42,6 +44,14 @@ The library supports four types of interval notation:
 The inclusion or exclusion of the endpoints determines how comparisons behave. For example, if an interval is `(1,5)`, calling `$interval->isGreaterThan(1)` will return `true` because 1 is not part of the interval. However, if the interval is `[1,5]`, then `$interval->isGreaterThanOrEqualTo(1)` will return `true` since 1 is included.
 
 Understanding this notation is crucial for interpreting comparison behavior correctly.
+
+The library also supports unbounded intervals using empty endpoints. These are interpreted as extending to infinity:
+  
+- `[a,)` - Left-bounded interval: includes `a` and extends infinitely to the right.
+- `(,b]` - Right-bounded interval: includes `b` and extends infinitely to the left.
+- `(,)`  - Fully unbounded interval: represents all real numbers.
+  
+Internally, unbounded sides are represented using `PHP_INT_MIN` or `PHP_INT_MAX`.
 
 ### Interval Comparisons
 

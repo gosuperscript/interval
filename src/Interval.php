@@ -23,16 +23,31 @@ class Interval implements Stringable
 
     public static function fromString(string $interval): static
     {
-        preg_match(pattern: '/^(?<openingSymbol>[\[(])(?<leftEndpoint>-?\d+(\.\d+)?),\s*(?<rightEndpoint>-?\d+(\.\d+)?)?(?<closingSymbol>[])])$/', subject: $interval, matches: $matches);
+        preg_match(pattern: '/^(?<openingSymbol>[\[(])(?<leftEndpoint>-?\d+(\.\d+)?)?,\s*(?<rightEndpoint>-?\d+(\.\d+)?)?(?<closingSymbol>[])])$/', subject: $interval, matches: $matches);
 
         if (empty($matches)) {
             throw new \InvalidArgumentException("Invalid interval: $interval");
         }
 
+        $openingSymbol = $matches['openingSymbol'];
+        $closingSymbol = $matches['closingSymbol'];
+        $leftEndpoint = $matches['leftEndpoint'] ?? null;
+        $rightEndpoint = $matches['rightEndpoint'] ?? null;
+
+        if (empty($leftEndpoint)) {
+            Assert::eq($openingSymbol, '(', 'Left endpoint must be defined when left side is closed.');
+            $leftEndpoint = PHP_INT_MIN;
+        }
+
+        if (empty($rightEndpoint)) {
+            Assert::eq($closingSymbol, ')', 'Right endpoint must be defined when right side is closed.');
+            $rightEndpoint = PHP_INT_MAX;
+        }
+
         return new static(
-            left: BigNumber::of($matches['leftEndpoint']),
-            right: BigNumber::of($matches['rightEndpoint']),
-            notation: IntervalNotation::from($matches['openingSymbol'].$matches['closingSymbol']),
+            left: BigNumber::of($leftEndpoint),
+            right: BigNumber::of($rightEndpoint),
+            notation: IntervalNotation::from($openingSymbol.$closingSymbol),
         );
     }
 
