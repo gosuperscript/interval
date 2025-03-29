@@ -60,7 +60,7 @@ class IntervalTest extends TestCase
             ['[1,2))', 'Invalid interval: [1,2))'],
             ['[1,]', 'Right endpoint must be defined when right side is closed.'],
             ['[,1]', 'Left endpoint must be defined when left side is closed.'],
-            ['[,]', 'Left endpoint must be defined when left side is closed.']
+            ['[,]', 'Left endpoint must be defined when left side is closed.'],
         ];
     }
 
