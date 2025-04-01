@@ -1,7 +1,7 @@
 {
     "name": "superscript/interval",
     "type": "library",
-    "license": "proprietary",
+    "license": "MIT",
     "version": "1.0.0",
     "autoload": {
         "psr-4": {

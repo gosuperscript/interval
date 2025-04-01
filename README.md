@@ -85,7 +85,7 @@ This includes:
 
 ## License
 
-Proprietary
+MIT
 
 ## About
 
