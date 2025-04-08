@@ -34,12 +34,12 @@ class Interval implements Stringable
         $leftEndpoint = $matches['leftEndpoint'] ?? null;
         $rightEndpoint = $matches['rightEndpoint'] ?? null;
 
-        if (empty($leftEndpoint)) {
+        if (! $leftEndpoint && $leftEndpoint !== '0') {
             Assert::eq($openingSymbol, '(', 'Left endpoint must be defined when left side is closed.');
             $leftEndpoint = PHP_INT_MIN;
         }
 
-        if (empty($rightEndpoint)) {
+        if (! $rightEndpoint && $rightEndpoint !== '0') {
             Assert::eq($closingSymbol, ')', 'Right endpoint must be defined when right side is closed.');
             $rightEndpoint = PHP_INT_MAX;
         }
