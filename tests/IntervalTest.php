@@ -36,6 +36,8 @@ class IntervalTest extends TestCase
             ['(,)', PHP_INT_MIN, PHP_INT_MAX, IntervalNotation::Open],
             ['[1,2)', 1, 2, IntervalNotation::RightOpen],
             ['(1,2]', 1, 2, IntervalNotation::LeftOpen],
+            ['[0,1)', 0, 1, IntervalNotation::RightOpen],
+            ['[-1,0]', -1, 0, IntervalNotation::Closed],
         ];
     }
 
