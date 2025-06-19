@@ -169,4 +169,25 @@ class IntervalTest extends TestCase
             ['(2,5]'],
         ];
     }
+
+    #[Test]
+    #[DataProvider('equalityCases')]
+    public function it_can_check_if_interval_is_equal_to_another_interval(string $a, string $b, bool $equals): void
+    {
+        $this->assertEquals($equals, Interval::fromString($a)->isEqualTo(Interval::fromString($b)));
+    }
+
+    public static function equalityCases(): array
+    {
+        return [
+            ['[2,5]', '[2,5]', true],
+            ['(2,5)', '(2,5)', true],
+            ['[2,5)', '[2,5)', true],
+            ['(2,5]', '(2,5]', true],
+            ['[2,5]', '(2,5)', false],
+            ['[2,5)', '(2,5]', false],
+            ['(2,5]', '[2,5)', false],
+            ['(1,3]', '[1,3)', false],
+        ];
+    }
 }

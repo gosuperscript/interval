@@ -97,6 +97,13 @@ class Interval implements Stringable
         return $this->left->isGreaterThanOrEqualTo($value);
     }
 
+    public function isEqualTo(self $other): bool
+    {
+        return $this->left->isEqualTo($other->left) &&
+               $this->right->isEqualTo($other->right) &&
+               $this->notation === $other->notation;
+    }
+
     public function __toString(): string
     {
         return "{$this->notation->openingSymbol()}{$this->left},{$this->right}{$this->notation->closingSymbol()}";
