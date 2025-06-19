@@ -2,7 +2,7 @@
     "name": "superscript/interval",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "autoload": {
         "psr-4": {
             "Superscript\\Interval\\": "src/"
