@@ -2,7 +2,7 @@
     "name": "superscript/interval",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.4",
+    "version": "2.0.0",
     "autoload": {
         "psr-4": {
             "Superscript\\Interval\\": "src/"
@@ -17,13 +17,13 @@
     "require": {
         "php": "^8.3",
         "webmozart/assert": "^1.11",
-        "brick/math": "^0.12.0 || ^0.13.0"
+        "brick/math": "^0.19.0"
     },
     "require-dev": {
         "infection/infection": "^0.29.14",
         "laravel/pint": "^1.21",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^12.0",
+        "phpunit/phpunit": "^12.0,<12.5.12",
         "robiningelbrecht/phpunit-coverage-tools": "^1.9"
     },
     "config": {
