@@ -188,6 +188,8 @@ class IntervalTest extends TestCase
             ['[2,5)', '(2,5]', false],
             ['(2,5]', '[2,5)', false],
             ['(1,3]', '[1,3)', false],
+            ['[2,5]', '[2,9]', false],
+            ['[2,5]', '[0,5]', false],
         ];
     }
 }

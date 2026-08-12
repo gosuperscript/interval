@@ -31,8 +31,8 @@ class Interval implements Stringable
 
         $openingSymbol = $matches['openingSymbol'];
         $closingSymbol = $matches['closingSymbol'];
-        $leftEndpoint = $matches['leftEndpoint'] ?? null;
-        $rightEndpoint = $matches['rightEndpoint'] ?? null;
+        $leftEndpoint = $matches['leftEndpoint'];
+        $rightEndpoint = $matches['rightEndpoint'];
 
         if (! $leftEndpoint && $leftEndpoint !== '0') {
             Assert::eq($openingSymbol, '(', 'Left endpoint must be defined when left side is closed.');
@@ -56,7 +56,7 @@ class Interval implements Stringable
      * must be smaller than the right endpoint of the interval.
      * In other words, all parts of the interval must be smaller than the value to compare.
      */
-    public function isLessThan(BigNumber|int|float $value): bool
+    public function isLessThan(BigNumber|int|string $value): bool
     {
         return match ($this->notation->isRightOpen()) {
             true => $this->right->isLessThanOrEqualTo($value),
@@ -69,7 +69,7 @@ class Interval implements Stringable
      * must be less than or equal to the right endpoint of the interval.
      * In this case it does not matter if the right endpoint is open or closed.
      */
-    public function isLessThanOrEqualTo(BigNumber|int|float $value): bool
+    public function isLessThanOrEqualTo(BigNumber|int|string $value): bool
     {
         return $this->right->isLessThanOrEqualTo($value);
     }
@@ -79,7 +79,7 @@ class Interval implements Stringable
      * must be greater than the left endpoint of the interval.
      * In other words, all part of the interval must be bigger than the value to compare.
      */
-    public function isGreaterThan(BigNumber|int|float $value): bool
+    public function isGreaterThan(BigNumber|int|string $value): bool
     {
         return match ($this->notation->isLeftOpen()) {
             true => $this->left->isGreaterThanOrEqualTo($value),
@@ -92,7 +92,7 @@ class Interval implements Stringable
      * must be greater than or equal to the left endpoint of the interval.
      * In this case it does not matter if the left endpoint is open or closed.
      */
-    public function isGreaterThanOrEqualTo(BigNumber|int|float $value): bool
+    public function isGreaterThanOrEqualTo(BigNumber|int|string $value): bool
     {
         return $this->left->isGreaterThanOrEqualTo($value);
     }
