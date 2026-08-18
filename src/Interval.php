@@ -31,8 +31,8 @@ class Interval implements Stringable
 
         $openingSymbol = $matches['openingSymbol'];
         $closingSymbol = $matches['closingSymbol'];
-        $leftEndpoint = $matches['leftEndpoint'] ?? null;
-        $rightEndpoint = $matches['rightEndpoint'] ?? null;
+        $leftEndpoint = $matches['leftEndpoint'];
+        $rightEndpoint = $matches['rightEndpoint'];
 
         if (! $leftEndpoint && $leftEndpoint !== '0') {
             Assert::eq($openingSymbol, '(', 'Left endpoint must be defined when left side is closed.');
