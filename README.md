@@ -7,7 +7,7 @@ A PHP library for working with mathematical intervals. It provides an elegant wa
 Install the package via Composer:
 
 ```bash
-composer require superscript/interval
+composer require gosuperscript/interval
 ```
 
 ## Requirements
